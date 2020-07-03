@@ -1,7 +1,7 @@
 # build stage
-FROM golang:1.10.2-alpine3.7 AS build-env
+FROM golang:1.10-alpine AS build-env
 RUN apk --no-cache add git
-RUN go get p83.nl/go/ekster/...
+RUN CGO_ENABLED=0 go get -a -ldflags '-extldflags "-static"' p83.nl/go/ekster/...
 
 # final stage
 FROM alpine
